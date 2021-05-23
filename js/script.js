@@ -88,6 +88,11 @@ var app = new Vue ({
         ]
     },
     methods: {
-
+        activeChat: function(chatIndex) {
+            this.contacts.forEach(element => {
+                element.visible = false
+            });
+            this.contacts[chatIndex].visible = true;
+        }
     }
 });
