@@ -17,12 +17,12 @@
             <div class="back-bottom"></div>
             <div id="root">
                 <div class="left-container">
-                    <div class="user-row">
-                        <div class="left-mex-row">
+                    <div class="top-row">
+                        <div class="left-top-row">
                             <img src="img/avatar_io.jpg" alt="io">
-                            <h4>Nome utente</h4>
+                            <h5>Nome utente</h5>
                         </div>
-                        <div class="right-mex-row">
+                        <div class="right-top-row">
                             <i class="fas fa-circle-notch"></i>
                             <i class="fas fa-comment-alt"></i>
                             <i class="fas fa-ellipsis-v"></i>
@@ -44,14 +44,32 @@
                         <input type="text" placeholder="Cerca o inizia una nuova chat">
                     </div>
                     <div class="chats">
-                        <div v-for="(contact, index) in contacts" class="left-row single-chat">
-
+                        <div v-for="(contact, index) in contacts" class="left-row single-chat" :class="contact.visible ? 'active' : ''">
+                            <div class="contact-image">
+                                <img :src="'img/avatar'+contact.avatar+'.jpg'">
+                            </div>
+                            <div class="last-mex">
+                                <h4>{{contact.name}}</h4>
+                                <span class="last-mex-date">{{ contact.messages[contact.messages.length - 1].date }}</span>
+                                <p>{{ contact.messages[contact.messages.length - 1].text.slice(0, 26) }} ...</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="right-container">
-                    <div class="chat-top">
-
+                    <div class="top-row">
+                        <div v-for="(contact, index) in contacts" v-if="contact.visible" class="left-top-row">
+                            <img :src="'img/avatar'+ contact.avatar +'.jpg'" alt="io">
+                            <div class="contact-info">
+                                <h5>{{contact.name}}</h5>
+                                <p>Ultimo accesso oggi alle {{ contact.messages[contact.messages.length - 1].date }}</p>
+                            </div>
+                        </div>
+                        <div class="right-top-row">
+                            <i class="fas fa-search"></i>
+                            <i class="fas fa-paperclip"></i>
+                            <i class="fas fa-ellipsis-v"></i>
+                        </div>
                     </div>
                     <div class="chat-body">
 

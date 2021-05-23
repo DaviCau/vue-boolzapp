@@ -35,7 +35,7 @@ body {
     width: 33%;
 }
 
-.user-row {
+.top-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -43,18 +43,18 @@ body {
     height: 60px;
     padding: 10px;
 }
-.left-mex-row {
+.left-top-row {
     display: flex;
     align-items: center;
 }
-.left-mex-row h4 {
+.left-top-row h5 {
     margin-left: 10px;
 }
-.left-mex-row img {
+.left-top-row img {
     width: 45px;
     border-radius: 50%;
 }
-.right-mex-row i {
+.right-top-row i {
     color: #b1b1b1;
     margin: 5px;
 }
@@ -118,14 +118,47 @@ body {
     background-color: white;
 }
 
+.active {
+    background-color: #e9ebeb;
+}
+
+.contact-image img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.single-chat {
+    padding: 10px;
+    border-bottom: solid 1px whitesmoke;
+}
+.last-mex {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-left: 20px;
+    align-self: flex-start;
+}
+.last-mex-date {
+    font-size: 10px;
+    color: #b1b1b1;
+}
+.last-mex p {
+    width: 100%;
+    margin-top: 5px;
+    color: #b1b1b1;
+    font-size: 14px;
+}
+
 .right-container {
     width: 67%;
     border-left: solid 1px lightgray;
 }
 
-.chat-top {
-    height: 60px;
-    background-color: #eaeaea;
+.contact-info p {
+    margin-left: 10px;
+    color: #b1b1b1;
+    font-size: 12px;
 }
 
 .chat-body {
