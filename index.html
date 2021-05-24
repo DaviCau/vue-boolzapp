@@ -6,10 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/dayjs.min.js" integrity="sha512-0fcCRl828lBlrSCa8QJY51mtNqTcHxabaXVLPgw/jPA5Nutujh6CbTdDgRzl9aSPYW/uuE7c4SffFUQFBAy6lg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer">
         <link rel="stylesheet" href="css/style.css">
-        <title>Document</title>
+        <title>Boolzapp</title>
     </head>
     <body>
         <div class="app-backgound">
@@ -44,7 +45,7 @@
                         <input type="text" placeholder="Cerca o inizia una nuova chat">
                     </div>
                     <div class="chats">
-                        <div v-for="(contact, index) in contacts" class="left-row single-chat" :class="contact.visible ? 'active' : ''" @click="activeChat(index)">
+                        <div v-for="(contact, index) in contacts" class="left-row single-chat" :class="contact.active ? 'active' : ''" @click="activeChat(index)">
                             <div class="contact-image">
                                 <img :src="'img/avatar'+contact.avatar+'.jpg'">
                             </div>
@@ -58,7 +59,7 @@
                 </div>
                 <div class="right-container">
                     <div class="top-row">
-                        <div v-for="(contact, index) in contacts" v-if="contact.visible" class="left-top-row">
+                        <div v-for="(contact, index) in contacts" v-if="contact.active" class="left-top-row">
                             <img :src="'img/avatar'+ contact.avatar +'.jpg'" alt="io">
                             <div class="contact-info">
                                 <h5>{{contact.name}}</h5>
@@ -71,7 +72,7 @@
                             <i class="fas fa-ellipsis-v"></i>
                         </div>
                     </div>
-                    <div v-for="(contact, index) in contacts" v-if="contact.visible" class="chat-body">
+                    <div v-for="(contact, index) in contacts" v-if="contact.active" class="chat-body">
                         <div v-for="mex in contact.messages" :class="mex.status" class="message">
                             {{mex.text}}
                             <div class="message-data">
@@ -84,7 +85,7 @@
                             <i class="far fa-smile"></i>
                         </div>
                         <div class="text-input">
-                            <input type="text" placeholder="Scrivi un messaggio">
+                            <input type="text" placeholder="Scrivi un messaggio" v-model="textNewMex" @keydown.enter="sendMex(); replyMex()">
                         </div>
                         <div class="aside-text-input">
                             <i class="fas fa-microphone"></i>

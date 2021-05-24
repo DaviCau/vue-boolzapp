@@ -23,11 +23,12 @@ var app = new Vue ({
                         status: 'received'
                     }
                 ],
+                active: true
             },
             {
                 name: 'Fabio',
                 avatar: '_2',
-                visible: false,
+                visible: true,
                 messages: [
                     {
                         date: '20/03/2020 16:30:00',
@@ -45,11 +46,12 @@ var app = new Vue ({
                         status: 'sent'
                     }
                 ],
+                active: false
             },     
             {
                 name: 'Samuele',
                 avatar: '_3',
-                visible: false,
+                visible: true,
                 messages: [
                     {
                         date: '28/03/2020 10:10:40',
@@ -67,11 +69,12 @@ var app = new Vue ({
                         status: 'received'
                     }
                 ],
+                active: false
             },
             {
                 name: 'Luisa',
                 avatar: '_4',
-                visible: false,
+                visible: true,
                 messages: [
                     {
                         date: '10/01/2020 15:30:55',
@@ -84,15 +87,47 @@ var app = new Vue ({
                         status: 'received'
                     }
                 ],
+                active: false
             }
-        ]
+        ],
+        textNewMex: ""
     },
     methods: {
         activeChat: function(chatIndex) {
             this.contacts.forEach(element => {
-                element.visible = false
+                element.active = false
             });
-            this.contacts[chatIndex].visible = true;
+            this.contacts[chatIndex].active = true;
+        },
+        sendMex: function () {
+            var newText = this.textNewMex;
+            var newMex = {
+                date: dayjs().format('DD/MM/YYYY HH:mm:ss'),
+                text: newText,
+                status: 'sent',
+                sentByMe: true
+            }
+            this.contacts.forEach(element => {
+                if (element.active && newText.trim().length > 0) {
+                    element.messages.push(newMex);
+                }
+            });
+            this.textNewMex = "";
+        },
+        replyMex: function() {
+            var newText = this.textNewMex;
+            var newReply = {
+                date: dayjs().format('DD/MM/YYYY HH:mm:ss'),
+                text: "Ok",
+                status: 'received'
+            };
+            this.contacts.forEach(element => {
+                if (element.active && element.messages[element.messages.length - 1].sentByMe) {
+                    setTimeout(() => {
+                        element.messages.push(newReply);
+                    }, 1000);
+                }
+            });
         }
     }
 });
