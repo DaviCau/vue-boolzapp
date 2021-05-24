@@ -162,12 +162,60 @@ body {
 }
 
 .chat-body {
-    height: calc(95vh - 120px);
+    height: calc(95vh - 110px);
     background-image: url("../img/mine.jpg");
     overflow-y: scroll;
+    padding: 40px 70px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    position: relative;
+    width: 40%;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+.message-data {
+    position: absolute;
+    font-size: 8px;
+    color: #b1b1b1;
+    bottom: 0;
+    right: 0;
+    padding: 3px;
+}
+.sent {
+    align-self: flex-end;
+    background-color: #d5f9ba;
+}
+.received {
+    align-self: flex-start;
+    background-color: white;
 }
 
 .chat-bottom {
-    height: 60px;
+    height: 50px;
     background-color: #f3eeea;
+    display: flex;
+}
+
+.text-input {
+    width: calc(100% - 150px);
+    display: flex;
+    padding: 5px;
+}
+.text-input input {
+    width: 100%;
+    padding-left: 10px;
+    border-radius: 5px;
+    border-color: transparent;
+}
+.aside-text-input {
+    width: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #6b7376;
 }
