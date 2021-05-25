@@ -23,7 +23,6 @@ var app = new Vue ({
                         status: 'received'
                     }
                 ],
-                active: true
             },
             {
                 name: 'Fabio',
@@ -46,7 +45,6 @@ var app = new Vue ({
                         status: 'sent'
                     }
                 ],
-                active: false
             },     
             {
                 name: 'Samuele',
@@ -69,7 +67,6 @@ var app = new Vue ({
                         status: 'received'
                     }
                 ],
-                active: false
             },
             {
                 name: 'Luisa',
@@ -87,17 +84,14 @@ var app = new Vue ({
                         status: 'received'
                     }
                 ],
-                active: false
             }
         ],
+        activeChatIndex: 0,
         textNewMex: ""
     },
     methods: {
         activeChat: function(chatIndex) {
-            this.contacts.forEach(element => {
-                element.active = false
-            });
-            this.contacts[chatIndex].active = true;
+            this.activeChatIndex = chatIndex;
         },
         sendMex: function () {
             var newText = this.textNewMex;
@@ -107,11 +101,9 @@ var app = new Vue ({
                 status: 'sent',
                 sentByMe: true
             }
-            this.contacts.forEach(element => {
-                if (element.active && newText.trim().length > 0) {
-                    element.messages.push(newMex);
-                }
-            });
+            
+            this.contacts[this.activeChatIndex].messages.push(newMex);
+
             this.textNewMex = "";
         },
         replyMex: function() {
@@ -121,13 +113,10 @@ var app = new Vue ({
                 text: "Ok",
                 status: 'received'
             };
-            this.contacts.forEach(element => {
-                if (element.active && element.messages[element.messages.length - 1].sentByMe) {
-                    setTimeout(() => {
-                        element.messages.push(newReply);
-                    }, 1000);
-                }
-            });
+            
+            setTimeout(() => {
+                this.contacts[this.activeChatIndex].messages.push(newReply);
+            }, 1000);
         }
     }
 });

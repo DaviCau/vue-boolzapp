@@ -45,7 +45,7 @@
                         <input type="text" placeholder="Cerca o inizia una nuova chat">
                     </div>
                     <div class="chats">
-                        <div v-for="(contact, index) in contacts" class="left-row single-chat" :class="contact.active ? 'active' : ''" @click="activeChat(index)">
+                        <div v-for="(contact, index) in contacts" class="left-row single-chat" :class="activeChatIndex==index ? 'active' : ''" @click="activeChat(index)">
                             <div class="contact-image">
                                 <img :src="'img/avatar'+contact.avatar+'.jpg'">
                             </div>
@@ -59,11 +59,11 @@
                 </div>
                 <div class="right-container">
                     <div class="top-row">
-                        <div v-for="(contact, index) in contacts" v-if="contact.active" class="left-top-row">
-                            <img :src="'img/avatar'+ contact.avatar +'.jpg'" alt="io">
+                        <div class="left-top-row">
+                            <img :src="'img/avatar'+ contacts[activeChatIndex].avatar +'.jpg'">
                             <div class="contact-info">
-                                <h5>{{contact.name}}</h5>
-                                <p>Ultimo accesso oggi alle {{ contact.messages[contact.messages.length - 1].date }}</p>
+                                <h5>{{contacts[activeChatIndex].name}}</h5>
+                                <p>Ultimo accesso oggi alle {{ contacts[activeChatIndex].messages[contacts[activeChatIndex].messages.length - 1].date }}</p>
                             </div>
                         </div>
                         <div class="right-top-row">
@@ -72,8 +72,8 @@
                             <i class="fas fa-ellipsis-v"></i>
                         </div>
                     </div>
-                    <div v-for="(contact, index) in contacts" v-if="contact.active" class="chat-body">
-                        <div v-for="mex in contact.messages" :class="mex.status" class="message">
+                    <div class="chat-body">
+                        <div v-for="mex in contacts[activeChatIndex].messages" :class="mex.status" class="message">
                             {{mex.text}}
                             <div class="message-data">
                                 {{mex.date}}
