@@ -87,7 +87,8 @@ var app = new Vue ({
             }
         ],
         activeChatIndex: 0,
-        textNewMex: ""
+        textNewMex: "",
+        contactSearch: ""
     },
     methods: {
         activeChat: function(chatIndex) {
@@ -117,6 +118,16 @@ var app = new Vue ({
             setTimeout(() => {
                 this.contacts[this.activeChatIndex].messages.push(newReply);
             }, 1000);
+        },
+        contactsVisible: function() {
+            var toSearch = this.contactSearch;
+            console.log(toSearch);
+            this.contacts.forEach(element => {
+                element.visible = false;
+                if (element.name.includes(toSearch)) {
+                    element.visible = true;
+                }
+            });
         }
     }
 });
