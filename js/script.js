@@ -103,9 +103,9 @@ var app = new Vue ({
                 sentByMe: true
             }
             
-            this.contacts[this.activeChatIndex].messages.push(newMex);
-
-            this.textNewMex = "";
+            if (newText.trim().length>0) {
+                this.contacts[this.activeChatIndex].messages.push(newMex);
+            }
         },
         replyMex: function() {
             var newText = this.textNewMex;
@@ -115,9 +115,12 @@ var app = new Vue ({
                 status: 'received'
             };
             
-            setTimeout(() => {
-                this.contacts[this.activeChatIndex].messages.push(newReply);
-            }, 1000);
+            if (newText.trim().length>0) {
+                setTimeout(() => {
+                    this.contacts[this.activeChatIndex].messages.push(newReply);
+                }, 1000);
+            }
+            this.textNewMex = "";
         },
         contactsVisible: function() {
             var toSearch = this.contactSearch;
