@@ -127,7 +127,7 @@ var app = new Vue ({
             console.log(toSearch);
             this.contacts.forEach(element => {
                 element.visible = false;
-                if (element.name.includes(toSearch)) {
+                if (element.name.toUpperCase().includes(toSearch.toUpperCase())) {
                     element.visible = true;
                 }
             });
